@@ -1,3 +1,13 @@
+# Project purpose
+
+1. To create a basic calculator that can handle 2 operands and an operator, producing a calculation
+2. Do this as a console app first
+3. Extend this to handle expressions
+4. Repurpose into an API
+5. Add an SPA frontend
+
+# Notes to self
+
 To create a new console application:
 
 1. Open the terminal (`ctrl + shift + s` or `Terminal -> New Terminal` in head)
