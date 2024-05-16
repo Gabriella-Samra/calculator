@@ -19,13 +19,13 @@ namespace Calculator.Project
             Console.WriteLine(message);
             
             string answeredOperator = Console.ReadLine();
-            if (Calc.CheckOperatorMatchesAllowedOperators(answeredOperator))
+            if (SimpleCalculator.CheckOperatorMatchesAllowedOperators(answeredOperator))
             {
                 return answeredOperator;
             }    
             else
             {
-                throw new ArgumentException($"The requested operator: \"{answeredOperator}\" cannot be handled within this calculator, please enter only one of the following types: {string.Join(", ", Calc.operatorsList)}");
+                throw new ArgumentException($"The requested operator: \"{answeredOperator}\" cannot be handled within this calculator, please enter only one of the following types: {string.Join(", ", SimpleCalculator.operatorsList)}");
             }    
         }
     }

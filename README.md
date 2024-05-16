@@ -2,7 +2,11 @@
 
 1. To create a basic calculator that can handle 2 operands and an operator, producing a calculation
 2. Do this as a console app first
-3. Extend this to handle expressions
+3. Extend this to handle expressions in the following order of complexity:
+    1. Allow the user to type a single operator and operand combination, i.e. 1 + 2
+    2. Allow only chains of non-parenthesised, non-exponential expressions i.e. 1+2+3, with no 1+(2+3)
+    3. Allow exponential expressions, i.e. 1^2
+    4. Allow parenthetical expressions with exponents, i.e. 1+(2^3)
 4. Repurpose into an API
 5. Add an SPA frontend
 
