@@ -21,36 +21,25 @@ namespace Calculator.Project
             // var calculationOperator = PromptForCharacter("What type of equation would you like to do? (enter one of the following: " + String.Join(Calc.Operators));
 
             Console.WriteLine("Enter your first number: ");
-            entry1 = RequestModifier.StringToDouble(Console.ReadLine());
+            entry1 = TypeModifier.StringToDouble(Console.ReadLine());
 
             Console.WriteLine("Enter your second number: ");
-            entry2 = RequestModifier.StringToDouble(Console.ReadLine());  
+            entry2 = TypeModifier.StringToDouble(Console.ReadLine());  
 
-// move this to calculator
-            string[] operatorsList = 
-            {
-                RequestModifier.additionOperator,
-                RequestModifier.subtractionOperator,
-                RequestModifier.multiplicationOperator,
-                RequestModifier.divisionOperator
-            };
-
-// move this to calculator
-            string opertorListWithCommas = string.Join(", ", operatorsList);
-
-            Console.WriteLine("What type of equation would you like to do? (enter one of the following: " + opertorListWithCommas);
+            Console.WriteLine("What type of equation would you like to do? (enter one of the following: " + Calc.opertorListWithCommas);
+            
             // do the same as the questions above with the readline
             answeredOperator = Console.ReadLine();
-            if (RequestModifier.CheckOperatorMatchesAllowedOperators(answeredOperator))
+            if (Calc.CheckOperatorMatchesAllowedOperators(answeredOperator))
             {
                 formulaOperator = answeredOperator;
             }    
             else
             {
-                throw new ArgumentException("The requested operator cannot be handled within this calculator, please type only the following types: " + opertorListWithCommas);
+                throw new ArgumentException("The requested operator cannot be handled within this calculator, please type only the following types: " + Calc.opertorListWithCommas);
             }    
 
-// use string interpolation
+            // use string interpolation
             Console.WriteLine("The equation you want me to do is: " + entry1 + " " + formulaOperator + " " + entry2);
             Console.WriteLine("The result is: " + Calc.EquationCalculatorDecider(entry1.Value, entry2.Value, formulaOperator));
         }

@@ -6,6 +6,11 @@ namespace Calculator.Project
 {
     public class Calc
     {
+        private static string additionOperator = "+";
+        private static string subtractionOperator = "-";
+        private static string multiplicationOperator = "*";
+        private static string divisionOperator = "/";
+
         public static double Addition(double param1, double param2)
         {
             return param1 + param2;
@@ -28,31 +33,36 @@ namespace Calculator.Project
 
         public static double EquationCalculatorDecider(double param1, double param2, string formularOperator)
         {
-            // switch (formularOperator)
-            // {
-            //     case "+": return Calc.Addition(param1, param2);
-            //     case "-": return Calc.Subtraction(param1, param2);
-            //     case "*": return Calc.Multiplication(param1, param2);
-            //     case "/": return Calc.Division(param1, param2);
-            //     default: throw new NotSupportedException($"Cannot handle operation: ${formularOperator}");
-            // }
+            return formularOperator switch
+            {
+                "+" => Calc.Addition(param1, param2),
+                "-" => Calc.Subtraction(param1, param2),
+                "*" => Calc.Multiplication(param1, param2),
+                "/" => Calc.Division(param1, param2),
+                _ => throw new NotSupportedException($"Cannot handle operation: ${formularOperator}"),
+            };
+        }
 
-            if (formularOperator == "+")
+        private static readonly string[] operatorsList = 
+        {
+            Calc.additionOperator,
+            Calc.subtractionOperator,
+            Calc.multiplicationOperator,
+            Calc.divisionOperator
+        };
+
+         public static string opertorListWithCommas = string.Join(", ", operatorsList);
+
+        public static bool CheckOperatorMatchesAllowedOperators(string value)
+        {
+            foreach (string i in operatorsList)
             {
-                return Calc.Addition(param1, param2);
+                if (i == value)
+                {
+                    return true;
+                }
             }
-            else if (formularOperator == "-")
-            {
-                return Calc.Subtraction(param1, param2);
-            }
-            else if (formularOperator == "*")
-            {
-                return Calc.Multiplication(param1, param2);
-            }
-            else
-            {
-                return Calc.Division(param1, param2);
-            }
+            return false;
         }
     }
 }
