@@ -11,14 +11,14 @@ namespace Calculator.Project
 
         public static double PromptForDouble(string value)
         {
-            Console.WriteLine("Enter your " + value + " number: ");
+            Console.WriteLine($"Enter your {value} number: ");
             double response = TypeModifier.StringToDouble(Console.ReadLine());
             return response;
         }
 
         public static string PromptForOperator()
         {
-            Console.WriteLine("What type of equation would you like to do? (enter one of the following: " + Calc.opertorListWithCommas);
+            Console.WriteLine($"What type of equation would you like to do? (enter one of the following: {Calc.opertorListWithCommas}");
             
             answeredOperator = Console.ReadLine();
             if (Calc.CheckOperatorMatchesAllowedOperators(answeredOperator))
