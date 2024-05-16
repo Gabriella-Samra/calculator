@@ -10,7 +10,7 @@ namespace Calculator.Project
         public static double StringToDouble(string param)
         {
             if (string.IsNullOrEmpty(param)) throw new ArgumentNullException("param can't be null or empty");
-            if (!StringIsNumeric(param)) throw new ArgumentException("param doesn't represent a number");
+            if (!IsStringNumeric(param)) throw new ArgumentException("param doesn't represent a number");
             try
             {
                 return Convert.ToDouble(param);
@@ -21,9 +21,9 @@ namespace Calculator.Project
             }
         }
 
-        private static bool StringIsNumeric(string str)
+        private static bool IsStringNumeric(string str)
         {
-            return int.TryParse(str, out int intStr);
+            return double.TryParse(str, out double intStr);
         }        
     }
 }
