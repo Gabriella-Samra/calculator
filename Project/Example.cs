@@ -52,4 +52,45 @@ namespace Calculator.Project
 
         }
     }
+
+    public class Car
+    {
+        // static
+        public static string VehicleType = "Car";
+        // instance
+        public string Model;
+
+        // Doesn't work because we can't access instance-level fields in a static context
+        public static void Print(string variableName, Car car)
+        {
+            Console.WriteLine(variableName + ": " + Car.VehicleType + " - " + car.Model);
+        }
+
+        public void PrintInstanced(string variableName)
+        {
+            Console.WriteLine(variableName + ": " + Car.VehicleType + " - " + this.Model);
+        }
+    }
+
+    public class Factory
+    {
+        public static void MakeCars()
+        {
+            var volvo = new Car { Model = "Volvo" };
+            Car.Print("volvo", volvo);
+            volvo.PrintInstanced(nameof(volvo));
+            var tesla = new Car { Model = "Tesla" };
+            tesla.PrintInstanced(nameof(tesla));
+            var ferrari = new Car { Model = "Ferrari" };
+            ferrari.PrintInstanced(nameof(ferrari));
+            volvo.Model = "Prius";
+            volvo.PrintInstanced(nameof(volvo));
+            tesla.PrintInstanced(nameof(tesla));
+            ferrari.PrintInstanced(nameof(ferrari));
+            Car.VehicleType = "Automobile";
+            volvo.PrintInstanced(nameof(volvo));
+            tesla.PrintInstanced(nameof(tesla));
+            ferrari.PrintInstanced(nameof(ferrari));
+        }
+    }
 }

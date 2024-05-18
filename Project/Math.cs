@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace Calculator.Project
 {
-    public class SimpleCalculator
+    public class Math
     {
         private const string additionOperator = "+";
         private const string subtractionOperator = "-";
