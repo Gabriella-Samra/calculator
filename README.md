@@ -7,6 +7,7 @@
     2. Allow only chains of non-parenthesised, non-exponential expressions i.e. 1+2+3, with no 1+(2+3)
     3. Allow exponential expressions, i.e. 1^2
     4. Allow parenthetical expressions with exponents, i.e. 1+(2^3)
+    5. Allow parenthesis to be treated in an algebraic way ie. 2(2^3) = 16
 4. Repurpose into an API
 5. Add an SPA frontend
 
