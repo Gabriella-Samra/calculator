@@ -9,13 +9,15 @@ namespace Calculator.Project
     {
         private const string additionOperator = "+";
         private const string subtractionOperator = "-";
-        private const string multiplicationOperator = "*";
+        private const string multiplicationAsteriskOperator = "*";
+        private const string multiplicationTimesOperator = "x";
         private const string divisionOperator = "/";
         public static readonly ReadOnlyCollection<string> operatorsList = Array.AsReadOnly(new []
         {
             additionOperator,
             subtractionOperator,
-            multiplicationOperator,
+            multiplicationAsteriskOperator,
+            multiplicationTimesOperator,
             divisionOperator
         });
 
@@ -25,7 +27,8 @@ namespace Calculator.Project
             {
                 additionOperator => Addition(param1, param2),
                 subtractionOperator => Subtraction(param1, param2),
-                multiplicationOperator => Multiplication(param1, param2),
+                multiplicationAsteriskOperator => Multiplication(param1, param2),
+                multiplicationTimesOperator => Multiplication(param1, param2),
                 divisionOperator => Division(param1, param2),
                 _ => throw new NotSupportedException($"Cannot handle operation: ${formulaOperator}"),
             };
