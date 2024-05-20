@@ -34,10 +34,10 @@ namespace Calculator.Project
             //Expanded Expression Calculator
             string? expression = Prompt.PromptForString("What equation do you want me to calculate?");
             Console.WriteLine($"The equation you want me to do is: {expression}");
-            var myarray = ExpressionParser.FindAllOperators(expression);
+            var myarray = AdvancedExpressionParser.FindAllOperators(expression);
             var myitem = myarray[0];
             Console.WriteLine($"My operator type is: {myitem.Operator}, and my operator position is {myitem.OperatorPosition}");
-            Console.WriteLine($"My first number is: {ExpressionParser.FindTheFirstNumberForAdvancedExpression(expression, myarray)} and my last number is: {ExpressionParser.FindTheLastNumberForAdvancedExpression(expression, myarray)}");
+            Console.WriteLine($"My first number is: {AdvancedExpressionParser.FindTheFirstNumberForAdvancedExpression(expression, myarray)} and my last number is: {AdvancedExpressionParser.FindTheLastNumberForAdvancedExpression(expression, myarray)}");
             // Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
 
         }

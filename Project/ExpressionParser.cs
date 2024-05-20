@@ -54,58 +54,11 @@ namespace Calculator.Project
             throw new ArgumentException($"Cannot Find the Operator, please make sure to supply one from the following list: {string.Join(", ", Math.operatorsList)}");
         }
 
-        public static List<ParsedOperatorDto> FindAllOperators(string expression)
-        {
-            List<ParsedOperatorDto> operatorsInString = new List<ParsedOperatorDto>();
-            var strLength = expression.Length;
-            for (int i = 0; i < strLength; i++)
-            {
-                var operatorCandidate = char.ToString(expression[i]);
-
-                if (Math.operatorsList.Contains(operatorCandidate))
-                {
-                    operatorsInString.Add(new ParsedOperatorDto
-                    {
-                        Operator = operatorCandidate,
-                        OperatorPosition = i
-                    });
-                }
-            }
-
-            if (operatorsInString.Count == 0)
-            {
-                throw new ArgumentException($"Cannot Find the Operator, please make sure to supply one from the following list: {string.Join(", ", Math.operatorsList)}");
-            }
-            return operatorsInString;
-        }
-
         private static double FindTheFirstNumber(string expression, int operatorPosition)
         {
             string firststringNumber = "";
 
             for (int i = 0; i < operatorPosition; i++)
-            {
-                firststringNumber += char.ToString(expression[i]);
-            }
-
-            if (string.IsNullOrEmpty(firststringNumber))
-            {
-                throw new ArgumentException("We need a number at the beginning of the equation");
-            }
-            else
-            {
-                return Convert.ToDouble(firststringNumber);
-            }
-        }
-
-        public static double FindTheFirstNumberForAdvancedExpression(string expression,  List<ParsedOperatorDto> operatorsList)
-        {
-            string firststringNumber = "";
-
-            ParsedOperatorDto firstOperator = operatorsList[0];
-            int firstOperatorPosition = firstOperator.OperatorPosition;
-
-            for (int i = 0; i < firstOperatorPosition; i++)
             {
                 firststringNumber += char.ToString(expression[i]);
             }
@@ -132,28 +85,6 @@ namespace Calculator.Project
             if (string.IsNullOrEmpty(secondstringNumber))
             {
                 throw new ArgumentException("We need a number at the end of the equation");
-            }
-            else
-            {
-                return Convert.ToDouble(secondstringNumber);
-            }
-        }
-
-        public static double FindTheLastNumberForAdvancedExpression(string expression,  List<ParsedOperatorDto> operatorsList)
-        {
-            string secondstringNumber = "";
-
-            ParsedOperatorDto firstOperator = operatorsList[operatorsList.Count - 1];
-            int lastOperatorPosition = firstOperator.OperatorPosition;
-
-            for (int i = lastOperatorPosition + 1; i < expression.Length; i++)
-            {
-                secondstringNumber += char.ToString(expression[i]);
-            }
-
-            if (string.IsNullOrEmpty(secondstringNumber))
-            {
-                throw new ArgumentException("We need a number at the beginning of the equation");
             }
             else
             {
