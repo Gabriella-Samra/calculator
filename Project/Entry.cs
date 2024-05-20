@@ -26,10 +26,19 @@ namespace Calculator.Project
 
             // --
             
-            // Expression Calculator
+            // // Expression Calculator
+            // string? expression = Prompt.PromptForString("What equation do you want me to calculate?");
+            // Console.WriteLine($"The equation you want me to do is: {expression}");
+            // Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
+
+            //Expanded Expression Calculator
             string? expression = Prompt.PromptForString("What equation do you want me to calculate?");
             Console.WriteLine($"The equation you want me to do is: {expression}");
-            Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
+            var myarray = ExpressionParser.FindAllOperators(expression);
+            var myitem = myarray[0];
+            Console.WriteLine($"My operator type is: {myitem.Operator}, and my operator position is {myitem.OperatorPosition}");
+            // Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
+
         }
     }
 }

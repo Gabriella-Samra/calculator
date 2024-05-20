@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace Calculator.Project
@@ -69,6 +70,27 @@ namespace Calculator.Project
         public void PrintInstanced(string variableName)
         {
             Console.WriteLine(variableName + ": " + Car.VehicleType + " - " + this.Model);
+        }
+
+        public List<int> SomeNumberStuffWithLists()
+        {
+            var numStr = "1,2,3";
+            var numbers = numStr.Split(",").Select(n => int.Parse(n)).ToList();
+            var arr = new int[0];
+            var counter = 0;
+            foreach (var n in numbers)
+            {
+                Array.Resize(ref arr, arr.Length + 1);
+                arr[counter] = numbers[counter];
+                counter++;
+            }
+
+            var list = new List<int>();
+            foreach (var n in numbers)
+            {
+                list.Add(n);
+            }
+            return list;
         }
     }
 
