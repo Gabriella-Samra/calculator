@@ -20,20 +20,20 @@ namespace Calculator.Project
 
     class AdvancedExpressionParser
     {
-        // public static ParsedAdvancedExpressionDto Parse(string expression)
-        // {
-        //     var operatorDto = FindTheOperator(expression);
-        //     var firstNumber = FindTheFirstNumber(expression, operatorDto.OperatorPosition);
-        //     var secondNumber = FindTheSecondNumber(expression, operatorDto.OperatorPosition);
-        //     var result = new ParsedAdvancedExpressionDto
-        //     {
-        //         FirstNumber = firstNumber,
-        //         Operator = operatorDto.Operator,
-        //         SecondNumber = secondNumber
-        //     };
+        public static ParsedAdvancedExpressionDto Parse(string expression)
+        {
+            var operatorDto = FindAllOperators(expression);
+            var firstNumber = FindTheFirstNumberForAdvancedExpression(expression, operatorDto);
+            var lastNumber = FindTheLastNumberForAdvancedExpression(expression, operatorDto);
+            var result = new ParsedAdvancedExpressionDto
+            {
+                FirstNumber = firstNumber,
+                // Operator = operatorDto.Operator,
+                SecondNumber = lastNumber
+            };
 
-        //     return result;
-        // }
+            return result;
+        }
 
         public static List<ParsedAdvancedOperatorDto> FindAllOperators(string expression)
         {
