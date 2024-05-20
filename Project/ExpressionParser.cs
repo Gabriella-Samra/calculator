@@ -54,32 +54,6 @@ namespace Calculator.Project
             throw new ArgumentException($"Cannot Find the Operator, please make sure to supply one from the following list: {string.Join(", ", Math.operatorsList)}");
         }
 
-        // public static ParsedOperatorDto[] FindAllOperators(string expression)
-        // {
-        //     ParsedOperatorDto[] operatorsInString = Array.Empty<ParsedOperatorDto>();
-        //     var strLength = expression.Length;
-        //     for (int i = 0; i < strLength; i++)
-        //     {
-        //         var operatorCandidate = char.ToString(expression[i]);
-
-        //         if (Math.operatorsList.Contains(operatorCandidate))
-        //         {
-        //             Array.Resize(ref operatorsInString, operatorsInString.Length + 1);
-        //             operatorsInString[operatorsInString.Length - 1] = new ParsedOperatorDto
-        //             {
-        //                 Operator = operatorCandidate,
-        //                 OperatorPosition = i
-        //             };
-        //         }
-        //     }
-
-        //     if (operatorsInString.Length == 0)
-        //     {
-        //         throw new ArgumentException($"Cannot Find the Operator, please make sure to supply one from the following list: {string.Join(", ", Math.operatorsList)}");
-        //     }
-        //     return operatorsInString;
-        // }
-
         public static List<ParsedOperatorDto> FindAllOperators(string expression)
         {
             List<ParsedOperatorDto> operatorsInString = new List<ParsedOperatorDto>();
