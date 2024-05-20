@@ -37,6 +37,7 @@ namespace Calculator.Project
             var myarray = ExpressionParser.FindAllOperators(expression);
             var myitem = myarray[0];
             Console.WriteLine($"My operator type is: {myitem.Operator}, and my operator position is {myitem.OperatorPosition}");
+            Console.WriteLine($"My first number is: {ExpressionParser.FindTheFirstNumberForAdvancedExpression(expression, myarray)} and my last number is: {ExpressionParser.FindTheLastNumberForAdvancedExpression(expression, myarray)}");
             // Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
 
         }

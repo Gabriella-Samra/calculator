@@ -98,6 +98,28 @@ namespace Calculator.Project
             }
         }
 
+        public static double FindTheFirstNumberForAdvancedExpression(string expression,  List<ParsedOperatorDto> operatorsList)
+        {
+            string firststringNumber = "";
+
+            ParsedOperatorDto firstOperator = operatorsList[0];
+            int firstOperatorPosition = firstOperator.OperatorPosition;
+
+            for (int i = 0; i < firstOperatorPosition; i++)
+            {
+                firststringNumber += char.ToString(expression[i]);
+            }
+
+            if (string.IsNullOrEmpty(firststringNumber))
+            {
+                throw new ArgumentException("We need a number at the beginning of the equation");
+            }
+            else
+            {
+                return Convert.ToDouble(firststringNumber);
+            }
+        }
+
         private static double FindTheSecondNumber(string expression, int operatorPosition)
         {
             string secondstringNumber = "";
@@ -110,6 +132,28 @@ namespace Calculator.Project
             if (string.IsNullOrEmpty(secondstringNumber))
             {
                 throw new ArgumentException("We need a number at the end of the equation");
+            }
+            else
+            {
+                return Convert.ToDouble(secondstringNumber);
+            }
+        }
+
+        public static double FindTheLastNumberForAdvancedExpression(string expression,  List<ParsedOperatorDto> operatorsList)
+        {
+            string secondstringNumber = "";
+
+            ParsedOperatorDto firstOperator = operatorsList[operatorsList.Count - 1];
+            int lastOperatorPosition = firstOperator.OperatorPosition;
+
+            for (int i = lastOperatorPosition + 1; i < expression.Length; i++)
+            {
+                secondstringNumber += char.ToString(expression[i]);
+            }
+
+            if (string.IsNullOrEmpty(secondstringNumber))
+            {
+                throw new ArgumentException("We need a number at the beginning of the equation");
             }
             else
             {
