@@ -50,8 +50,8 @@ namespace Calculator.Project
                         if(parsedExpression.Operators[index].Operator == bodmasOperator)
                         {
                             operatorObj = parsedExpression.Operators[index];
-                            // Console.WriteLine(expression);
-                            // Console.WriteLine(parsedExpression);
+                            Console.WriteLine(expression);
+                            Console.WriteLine(parsedExpression);
                             expression = CalculateSubExpressionAndGenerateNewExpresion(parsedExpression, operatorObj, expression);
                             
                             // leave if the expr is only numbers

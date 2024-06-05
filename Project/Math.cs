@@ -12,8 +12,10 @@ namespace Calculator.Project
         private const string multiplicationAsteriskOperator = "*";
         private const string multiplicationTimesOperator = "x";
         private const string divisionOperator = "/";
+        private const string powerOperator = "^";
         public static readonly ReadOnlyCollection<string> operatorsList = Array.AsReadOnly(new []
         {
+            powerOperator,
             divisionOperator,
             multiplicationAsteriskOperator,
             multiplicationTimesOperator,
@@ -30,6 +32,7 @@ namespace Calculator.Project
                 multiplicationAsteriskOperator => Multiplication(param1, param2),
                 multiplicationTimesOperator => Multiplication(param1, param2),
                 divisionOperator => Division(param1, param2),
+                powerOperator => Power(param1, param2),
                 _ => throw new NotSupportedException($"Cannot handle operation: ${formulaOperator}"),
             };
         }
@@ -57,6 +60,11 @@ namespace Calculator.Project
         private static double Division(double param1, double param2)
         {
             return param1 / param2;
+        }
+
+        private static double Power(double param1, double param2)
+        {
+            return System.Math.Pow(param1, param2);
         }
     }
 }
