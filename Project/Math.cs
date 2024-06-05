@@ -14,11 +14,11 @@ namespace Calculator.Project
         private const string divisionOperator = "/";
         public static readonly ReadOnlyCollection<string> operatorsList = Array.AsReadOnly(new []
         {
-            additionOperator,
-            subtractionOperator,
+            divisionOperator,
             multiplicationAsteriskOperator,
             multiplicationTimesOperator,
-            divisionOperator
+            additionOperator,
+            subtractionOperator
         });
 
         public static double Calculate(double param1, double param2, string formulaOperator)

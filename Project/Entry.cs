@@ -27,20 +27,16 @@ namespace Calculator.Project
             // --
             
             // // Expression Calculator
-            // string? expression = Prompt.PromptForString("What equation do you want me to calculate?");
+            string? expression = Prompt.PromptForString("What equation do you want me to calculate?");
             // Console.WriteLine($"The equation you want me to do is: {expression}");
             // Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
 
             //Expanded Expression Calculator
-            string? expression = Prompt.PromptForString("What equation do you want me to calculate?");
+            //string? expression = "10+2/3*6"; //Prompt.PromptForString("What equation do you want me to calculate?");
             Console.WriteLine($"The equation you want me to do is: {expression}");
-            var myarray = AdvancedExpressionParser.FindAllOperators(expression);
-            var myitem = myarray[0];
-            Console.WriteLine($"My operator type is: {myitem.Operator}, and my operator position is {myitem.OperatorPosition}");
-            Console.WriteLine($"My first number is: {AdvancedExpressionParser.FindFirstNumber(expression, myarray)} and my last number is: {AdvancedExpressionParser.FindLastNumber(expression, myarray)}");
-            
-            Console.WriteLine($"middle numbers are: {AdvancedExpressionParser.ConcatenatedMiddleNumbers(expression, myarray)}");
-            // Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
+            // var myOperators = AdvancedExpressionParser.FindAllOperators(expression);
+            // Console.WriteLine($"My first number is: {AdvancedExpressionParser.FindFirstNumber(expression, myOperators)} and my last number is: {AdvancedExpressionParser.FindLastNumber(expression, myOperators)}");
+            Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
 
         }
     }

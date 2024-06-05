@@ -23,13 +23,57 @@ namespace Calculator.Project
 
     public class ParsedAdvancedExpressionDto
     {
-        public double FirstNumber { get; set; }
-        public string Operator { get; set; }
-        public double SecondNumber { get; set; }
+        public List<ParsedAdvancedOperatorDto> Operators { get; set; }
+        public List<ParsedAdvancedNumberDto> Numbers { get; set; }
+
+        public override string ToString()
+        {
+            string parsedExpressionString = "";
+            var operatorString = "";
+            foreach (var o in this.Operators) operatorString += o.Operator + ",";
+            parsedExpressionString += "Operators: " + operatorString;
+            var numberString = "";
+            foreach (var o in this.Numbers) numberString += o.Number + ",";
+            parsedExpressionString += "     Numbers: " + numberString;
+            return parsedExpressionString;
+        }
     }
 
     class AdvancedExpressionParser
     {
+        public static ParsedAdvancedExpressionDto Parse(string expression)
+        {
+            var operatorDto = FindAllOperators(expression);
+            var firstNumber = FindFirstNumber(expression, operatorDto);
+            var lastNumber = FindLastNumber(expression, operatorDto);
+            var middleNumbers = FindMiddleNumbers(expression, operatorDto);
+
+            var createFirstNumberObj = new ParsedAdvancedNumberDto
+            {
+                NumberStartPosition = 0,
+                NumberEndPosition = firstNumber.Length - 1,
+                Number = firstNumber
+            };
+
+            var createLastNumberObj = new ParsedAdvancedNumberDto
+            {
+                NumberStartPosition = expression.Length - lastNumber.Length,
+                NumberEndPosition = expression.Length - 1,
+                Number = lastNumber
+            };
+
+            middleNumbers.Insert(0, createFirstNumberObj);
+            middleNumbers.Add(createLastNumberObj);
+
+            var result = new ParsedAdvancedExpressionDto
+            {
+                Operators = operatorDto,
+                Numbers = middleNumbers
+            };
+
+            return result;
+        }
+
         public static string ConcatenatedMiddleNumbers(string expression, List<ParsedAdvancedOperatorDto> operatorsList)
         {
             var MiddleNumberList = FindMiddleNumbers(expression, operatorsList);
@@ -42,20 +86,6 @@ namespace Calculator.Project
             }
 
             return String.Join(", ", n);
-        }
-        public static ParsedAdvancedExpressionDto Parse(string expression)
-        {
-            var operatorDto = FindAllOperators(expression);
-            var firstNumber = FindFirstNumber(expression, operatorDto);
-            var lastNumber = FindLastNumber(expression, operatorDto);
-            var result = new ParsedAdvancedExpressionDto
-            {
-                FirstNumber = firstNumber,
-                // Operator = operatorDto.Operator,
-                SecondNumber = lastNumber
-            };
-
-            return result;
         }
 
         public static List<ParsedAdvancedOperatorDto> FindAllOperators(string expression)
@@ -83,7 +113,7 @@ namespace Calculator.Project
             return operatorsInString;
         }
 
-        public static double FindFirstNumber(string expression, List<ParsedAdvancedOperatorDto> operatorsList)
+        public static string FindFirstNumber(string expression, List<ParsedAdvancedOperatorDto> operatorsList)
         {
             string firststringNumber = "";
 
@@ -101,36 +131,32 @@ namespace Calculator.Project
             }
             else
             {
-                return Convert.ToDouble(firststringNumber);
+                return firststringNumber;
             }
         }
 
-        public static double FindLastNumber(string expression, List<ParsedAdvancedOperatorDto> operatorsList)
+        public static string FindLastNumber(string expression, List<ParsedAdvancedOperatorDto> operatorsList)
         {
-            string secondstringNumber = "";
+            string laststringNumber = "";
 
             ParsedAdvancedOperatorDto lastOperator = operatorsList[operatorsList.Count - 1];
             int lastOperatorPosition = lastOperator.OperatorPosition;
 
             for (int i = lastOperatorPosition + 1; i < expression.Length; i++)
             {
-                secondstringNumber += char.ToString(expression[i]);
+                laststringNumber += char.ToString(expression[i]);
             }
 
-            if (string.IsNullOrEmpty(secondstringNumber))
+            if (string.IsNullOrEmpty(laststringNumber))
             {
-                throw new ArgumentException("We need a number at the beginning of the equation");
+                throw new ArgumentException("We need a number at the end of the equation");
             }
             else
             {
-                return Convert.ToDouble(secondstringNumber);
+                return laststringNumber;
             }
         }
 
-        // store position of the 2 operators you are looking between
-        // concat all the characters between the 2 operator positions
-        // put that concatenated number in a new list that stored the number and the index position
-        // run again until the position of the last operator 
         public static List<ParsedAdvancedNumberDto> FindMiddleNumbers(string expression, List<ParsedAdvancedOperatorDto> operators)
         {
             List<ParsedAdvancedNumberDto> middleNumbers = new List<ParsedAdvancedNumberDto>();
