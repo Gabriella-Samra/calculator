@@ -60,7 +60,9 @@ namespace Calculator.Project
                             var isOnlyNumbers = true;
                             foreach (var character in expression)
                             {
-                                if (!char.IsNumber(character))
+                                var notNumeric = !char.IsNumber(character);
+                                var notDecimalPoint = character != '.';
+                                if (notNumeric && notDecimalPoint)
                                 {
                                     isOnlyNumbers = false;
                                     break;

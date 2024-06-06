@@ -27,12 +27,12 @@ namespace Calculator.Project
             // --
             
             // // Expression Calculator
-            string? expression = Prompt.PromptForString("What equation do you want me to calculate?");
+            // string? expression = Prompt.PromptForString("What equation do you want me to calculate?");
             // Console.WriteLine($"The equation you want me to do is: {expression}");
             // Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
 
             //Expanded Expression Calculator
-            //string? expression = "10+2/3*6"; //Prompt.PromptForString("What equation do you want me to calculate?");
+            string? expression = "2^8/3*6+100-250"; //Prompt.PromptForString("What equation do you want me to calculate?");
             Console.WriteLine($"The equation you want me to do is: {expression}");
             // var myOperators = AdvancedExpressionParser.FindAllOperators(expression);
             // Console.WriteLine($"My first number is: {AdvancedExpressionParser.FindFirstNumber(expression, myOperators)} and my last number is: {AdvancedExpressionParser.FindLastNumber(expression, myOperators)}");
