@@ -17,7 +17,7 @@ namespace Calculator.Tests
         public void SingleOperatorPositiveNumbersOnlyCheck()
         {
             string? expression = "12/6";
-            var result = Core.ExpressionCalculator.ReturnResultOfExpression(expression);
+            var result = Core.ExpressionCalculator.Calculate(expression);
             Assert.That(result, Is.EqualTo(2));
         }
 
@@ -25,7 +25,7 @@ namespace Calculator.Tests
         public void PowerOperatorPositiveNumbersOnlyCheck()
         {
             string? expression = "3^3";
-            var result = Core.ExpressionCalculator.ReturnResultOfExpression(expression);
+            var result = Core.ExpressionCalculator.Calculate(expression);
             Assert.That(result, Is.EqualTo(27));
         }
 
@@ -33,7 +33,7 @@ namespace Calculator.Tests
         public void SingleOperatorPositiveNumbersWithDecimalOnlyCheck()
         {
             string? expression = "10*2.4";
-            var result = Core.ExpressionCalculator.ReturnResultOfExpression(expression);
+            var result = Core.ExpressionCalculator.Calculate(expression);
             Assert.That(result, Is.EqualTo(24));
         }
 
@@ -41,7 +41,7 @@ namespace Calculator.Tests
         public void MultipleOperatorPositiveNumbersOnlyCheck()
         {
             string? expression = "4-3+10/2*10";
-            var result = Core.ExpressionCalculator.ReturnResultOfExpression(expression);
+            var result = Core.ExpressionCalculator.Calculate(expression);
             Assert.That(result, Is.EqualTo(-49));
         }
 
@@ -49,7 +49,7 @@ namespace Calculator.Tests
         public void MultipleOperatorNegativeNumbersOnlyCheck()
         {
             string? expression = "-5--2*-6";
-            var result = Core.ExpressionCalculator.ReturnResultOfExpression(expression);
+            var result = Core.ExpressionCalculator.Calculate(expression);
             Assert.That(result, Is.EqualTo(-17));
         }
     }

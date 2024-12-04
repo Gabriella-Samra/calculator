@@ -25,7 +25,7 @@ namespace Calculator.Core
         public string FormulaOperator { get; set; }
     }
 
-        public static double ReturnResultOfExpression(string expression)
+        public static double Calculate(string expression)
         {
             var parsedExpression = AdvancedExpressionParser.ParseEquationIntoNumbersAndOperators(expression);
             double result = TypeModifier.StringToDouble(Calculation(parsedExpression, expression));
