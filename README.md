@@ -1,5 +1,5 @@
 # NOTE ABOUT FUNCTIONALITY
-Because I didn't bother to research BODMAS or PEDMAS properly and just implemented this calcuator as per how we were taugh it comes out with the wrong results. It will implement the equation in order of (^/*+- rather than resolving Multiplication and Division at the same time left to right and Addition and Subraction at the same time left to right. This is a product of the terrible UK education system as everyone I know would have thought I was correct! Might fix at some point...
+Because I didn't research BODMAS or PEDMAS properly and just implemented this calcuator as per how we were taugh it comes out with the wrong results. It will implement the equation in order of (^/*+- rather than resolving Multiplication and Division at the same time left to right and Addition and Subraction at the same time left to right. This is a product of the terrible UK education system as everyone I know would have thought I was correct! Might fix at some point...
 
 # Project purpose
 
