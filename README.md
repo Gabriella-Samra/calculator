@@ -1,3 +1,6 @@
+# NOTE ABOUT FUNCTIONALITY
+Because I didn't bother to research BODMAS or PEDMAS properly and just implemented this calcuator as per how we were taugh it comes out with the wrong results. It will implement the equation in order of (^/*+- rather than resolving Multiplication and Division at the same time left to right and Addition and Subraction at the same time left to right. This is a product of the terrible UK education system as everyone I know would have thought I was correct! Might fix at some point...
+
 # Project purpose
 
 1. To create a basic calculator that can handle 2 operands and an operator, producing a calculation
@@ -7,6 +10,8 @@
     2. Allow only chains of non-parenthesised, non-exponential expressions i.e. 1+2+3, with no 1+(2+3)
     3. Allow exponential expressions, i.e. 1^2
     4. Allow negative numbers in the expression
+
+    NOT DONE FOR NOW: 
     5. Allow parenthetical expressions with exponents, i.e. 1+(2^3)
     6. Allow parenthesis to be treated in an algebraic way ie. 2(2^3) = 16
 4. Repurpose into an API

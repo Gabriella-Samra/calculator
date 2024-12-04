@@ -32,35 +32,9 @@ namespace Calculator.Core
             // Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
 
             //Expanded Expression Calculator
-            Console.WriteLine("Because I didn't bother to research BODMAS or PEDMAS properly and just implemented this calcuator as per my memory it comes out with the wrong results.");
-            Console.WriteLine("It will implement the equation in order of (^/*+- rather than resolving Multiplication and Division at the same time left to right and Addition and ");
-            Console.WriteLine("Subraction at the same time left to right. This is a product of the terrible UK education system as everyone I know would have thought I was correct!");
-
-            string? expression = "12/6";
+            string? expression = Prompt.PromptForString("What equation do you want me to calculate?");
             Console.WriteLine($"The equation you want me to do is: {expression}");
             Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
-            // Answer = 2
-
-            expression = "3^3";
-            Console.WriteLine($"The equation you want me to do is: {expression}");
-            Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
-            // Answer = 27
-
-            expression = "10*2.4";
-            Console.WriteLine($"The equation you want me to do is: {expression}");
-            Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
-            // Answer = 24
-
-            expression = "4-3+10/2*10";
-            Console.WriteLine($"The equation you want me to do is: {expression}");
-            Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
-            // Answer = -49
-
-            expression = "-5--2*-6";
-            Console.WriteLine($"The equation you want me to do is: {expression}");
-            Console.WriteLine($"The result is: {ExpressionCalculator.ReturnResultOfExpression(expression)}");
-            // Answer = -17
-
         }
     }
 }
