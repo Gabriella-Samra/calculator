@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 using System.Runtime.ExceptionServices;
 using System.Threading.Tasks;
 
-namespace Calculator.Project
+namespace Calculator.Core
 {
     public class ParsedAdvancedOperatorDto
     {
@@ -41,7 +41,7 @@ namespace Calculator.Project
 
     class AdvancedExpressionParser
     {
-        public static ParsedAdvancedExpressionDto Parse(string expression)
+        public static ParsedAdvancedExpressionDto ParseEquationIntoNumbersAndOperators(string expression)
         {
             var operatorDto = FindAllOperators(expression);
             var firstNumber = FindFirstNumber(expression, operatorDto);
@@ -110,6 +110,32 @@ namespace Calculator.Project
             {
                 throw new ArgumentException($"Cannot Find the Operator, please make sure to supply one from the following list: {string.Join(", ", Math.operatorsList)}");
             }
+            
+            for (int j = 0; j < operatorsInString.Count; j++)
+            {
+                if(
+                    operatorsInString[0].OperatorPosition == 0 && 
+                    operatorsInString[0].Operator == "-" && 
+                    operatorsInString[1].OperatorPosition != (operatorsInString[0].OperatorPosition + 1))
+                {
+                //     Console.WriteLine($"Selected Operator to be removed{operatorsInString[j].Operator}");
+                //     Console.WriteLine($"Selected Operator's Position{operatorsInString[j].OperatorPosition}");
+                    operatorsInString.RemoveAt(j);
+                }
+            }
+            
+            for (int k = 1; k < operatorsInString.Count; k++)
+            {
+                if( 
+                    operatorsInString[k].Operator == "-" && 
+                    operatorsInString[k].OperatorPosition == operatorsInString[k-1].OperatorPosition + 1)
+                {
+                    // Console.WriteLine($"Selected Operator to be removed{operatorsInString[k].Operator}");
+                    // Console.WriteLine($"Selected Operator's Position{operatorsInString[k].OperatorPosition}");
+                    operatorsInString.RemoveAt(k);
+                }
+            }
+            
             return operatorsInString;
         }
 
@@ -129,6 +155,8 @@ namespace Calculator.Project
             {
                 throw new ArgumentException("We need a number at the beginning of the equation");
             }
+
+            // Could create the first number object here instead
             else
             {
                 return firststringNumber;
@@ -151,6 +179,8 @@ namespace Calculator.Project
             {
                 throw new ArgumentException("We need a number at the end of the equation");
             }
+
+            // Could create the last number object here instead
             else
             {
                 return laststringNumber;
@@ -168,6 +198,8 @@ namespace Calculator.Project
                 var rightOperator = operators[operatorIndex + 1];
 
                 var parsed = "";
+
+                // can make j labelled i
                 for (int j = leftOperator.OperatorPosition + 1; j < rightOperator.OperatorPosition; j++)
                 {
                     parsed += char.ToString(expression[j]);
@@ -182,6 +214,9 @@ namespace Calculator.Project
 
                 operatorIndex++;
             }
+
+            var checkingMiddleNumebers = middleNumbers.Select(x => x.Number).ToArray();
+            // Console.WriteLine(string.Join(", ", checkingMiddleNumebers));
 
             return middleNumbers;
         }

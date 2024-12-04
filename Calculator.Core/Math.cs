@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Threading.Tasks;
 
-namespace Calculator.Project
+namespace Calculator.Core
 {
     public class Math
     {

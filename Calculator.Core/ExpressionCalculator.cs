@@ -7,7 +7,7 @@ using System.Reflection.Metadata.Ecma335;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace Calculator.Project
+namespace Calculator.Core
 {
     public class ExpressionCalculator
     {
@@ -27,7 +27,7 @@ namespace Calculator.Project
 
         public static double ReturnResultOfExpression(string expression)
         {
-            var parsedExpression = AdvancedExpressionParser.Parse(expression);
+            var parsedExpression = AdvancedExpressionParser.ParseEquationIntoNumbersAndOperators(expression);
             double result = TypeModifier.StringToDouble(Calculation(parsedExpression, expression));
             return result;
         }
@@ -44,53 +44,66 @@ namespace Calculator.Project
                     ParsedAdvancedOperatorDto operatorObj = null;
                     
                     // find an instance of a matching operator from above
-                    int index = 0;
-                    while (index < parsedExpression.Operators.Count)
+                    int i = 0;
+                    while (i < parsedExpression.Operators.Count)
                     {
-                        if(parsedExpression.Operators[index].Operator == bodmasOperator)
+                        if(parsedExpression.Operators[i].Operator == bodmasOperator)
                         {
-                            operatorObj = parsedExpression.Operators[index];
-                            Console.WriteLine(expression);
-                            Console.WriteLine(parsedExpression);
-                            expression = CalculateSubExpressionAndGenerateNewExpresion(parsedExpression, operatorObj, expression);
-                            
-                            // leave if the expr is only numbers
-                            
-                            // non-LINQ version
-                            var isOnlyNumbers = true;
-                            foreach (var character in expression)
+                            operatorObj = parsedExpression.Operators[i];
+                            // Console.WriteLine(expression);
+                            //Console.WriteLine(parsedExpression);
+                            expression = CalculateSubExpressionAndReturnTheGeneratedNewExpresion(parsedExpression, operatorObj, expression);
+
+                            bool IsOnlyNegativeNumber(string expression)
                             {
-                                var notNumeric = !char.IsNumber(character);
-                                var notDecimalPoint = character != '.';
-                                if (notNumeric && notDecimalPoint)
+                                // If its empty return false
+                                if (string.IsNullOrEmpty(expression))
+                                    return false;
+
+                                // If it doesnt start with a - and is less that 2 characters long then return false
+                                if (!expression.StartsWith("-") || expression.Length < 2)
+                                    return false;
+                                
+                                // If all the caharacters after the first character is not a digit return false
+                                for (int i = 1; i < expression.Length; i++)
                                 {
-                                    isOnlyNumbers = false;
-                                    break;
+                                    if (!char.IsDigit(expression[i]) && expression[i] != '.')
+                                        return false;
                                 }
+
+                                // If it is a negative number eg. -4.9 then return true
+                                return true;
                             }
-                            if (isOnlyNumbers) return expression;
+
+                            bool IsOnlPositiveNumbers(string expression)
+                            {
+                                foreach (var character in expression)
+                                {
+                                    var notANumber = !char.IsNumber(character);
+                                    var notDecimalPoint = character != '.';
+                                    int positionOfCharacter = expression.IndexOf(character);
+                                    if (notANumber && notDecimalPoint )
+                                    {
+                                        return false;
+                                    }
+                                }
+                                return true;
+                            }
+
+                            if (IsOnlPositiveNumbers(expression) || IsOnlyNegativeNumber(expression)) return expression;
                             
-                            // LINQ version, in which an anonymous function/lambda is passed to .All which does the same check as above
-                            // isOnlyNumbers = expression.All(x => char.IsNumber(x));
-                            // if (isOnlyNumbers) return expression;
-                            
-                            parsedExpression = AdvancedExpressionParser.Parse(expression);
+                            parsedExpression = AdvancedExpressionParser.ParseEquationIntoNumbersAndOperators(expression);
                             break;
                         }
 
-                        index++;
+                        i++;
                     }    
                 }
             }
                 return expression;
         }
 
-        private int MyLambda(int x) 
-        {
-            return x + 2;
-        }
-
-        private static string CalculateSubExpressionAndGenerateNewExpresion(ParsedAdvancedExpressionDto parsedExpression, ParsedAdvancedOperatorDto operatorObj, string expression)
+        private static string CalculateSubExpressionAndReturnTheGeneratedNewExpresion(ParsedAdvancedExpressionDto parsedExpression, ParsedAdvancedOperatorDto operatorObj, string expression)
         {
             ParsedParametersDto parameters = FindLeftAndRightOperands(parsedExpression, operatorObj);
 
@@ -98,7 +111,7 @@ namespace Calculator.Project
             var rightParam = TypeModifier.StringToDouble(parameters.RightOperand.Number);
             double subCalculationResult = Math.Calculate(leftParam, rightParam, parameters.FormulaOperator);
 
-            // (maybe should be a separate method?)
+            // (maybe should be a separate method?) 
             string newExpression = "";
             var beginningOfResultsSectionOfString = parameters.LeftOperand.NumberStartPosition;
             var endOfResultsSectionOfString = parameters.RightOperand.NumberEndPosition;

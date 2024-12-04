@@ -4,7 +4,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
-namespace Calculator.Project
+namespace Calculator.Core
 {
 
     // can you use exception to change program flow as a return
